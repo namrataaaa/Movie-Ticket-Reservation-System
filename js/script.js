@@ -3,6 +3,32 @@ var Rows=["A","B","C","D","E","F","G","H","I","J"];
 var Columns=12;
 var TotalSeats=Rows.length*Columns;
 
+function showAlert(message, className) {
+	const div = document.createElement('div');
+	div.className = `alert alert-${className}`;
+	div.style.width = '70%';
+	div.style.marginLeft = 'auto';
+	div.style.marginRight = 'auto';
+	div.appendChild(document.createTextNode(message));
+	const container = document.querySelector('.myContainer');
+	const form = document.querySelector('.selectionForm');
+	container.insertBefore(div, form);
+	setTimeout(() => document.querySelector('.alert').remove(), 2000); 
+}
+
+function showAlertBooking(message, className) {
+	const div = document.createElement('div');
+	div.className = `alert alert-${className}`;
+	div.style.width = '70%';
+	div.style.marginLeft = 'auto';
+	div.style.marginRight = 'auto';
+	div.appendChild(document.createTextNode(message));
+	const container = document.querySelector('.screen-ui');
+	const form = document.querySelector('#screen');
+	container.insertBefore(div, form);
+	setTimeout(() => document.querySelector('.alert').remove(), 2000); 
+}
+
 function convertIntToSeatNumbers(seats){
 	var bookedSeats="";
 	_.each(seats,function(seat){
@@ -32,13 +58,14 @@ var InitialView = Backbone.View.extend({
 		if(reservedseats!=null)
 			availableSeats=TotalSeats-reservedseats.length;
 		if(!$('#name').val()){
-			$(".error").html("Name is required");
+			showAlert("Name is required", 'danger');
 		}
 		else if(!selectedNumberOfSeats){
-			$(".error").html("Number of seats is required");
+			showAlert("Number of seats is required", 'danger');
 		}
 		else if(parseInt(selectedNumberOfSeats)>availableSeats){
-			$(".error").html("You can only select "+availableSeats+" seats")
+			var msg = "You can only select "+availableSeats+" seats";
+			showAlert(msg, 'danger');
 		}
 		else
 		{
@@ -71,9 +98,9 @@ var ScreenUI=Backbone.View.extend({
 		var id="#"+event.currentTarget.id;
 		if($(id).attr('class')=='empty-seat' && BookedSeats.length<$('#seats').val()){
 			BookedSeats.push(id.substr(1));
+			console.log("ID of seat: ", id);
 			$(id).attr('src','img/booked-seat.png');
 			$(id).attr('class','booked-seat');
-
 		}
 		else if($(id).attr('class')=='booked-seat'){
 			BookedSeats=_.without(BookedSeats,id.substr(1));
@@ -85,8 +112,10 @@ var ScreenUI=Backbone.View.extend({
 		var bookedSeats=convertIntToSeatNumbers(BookedSeats);
 		var movieName = $('#selectedMovie').val();
 		var totalPrice = 0;
-		if (movieName == 'Movie 1')
+		if (movieName == 'Jurassic Park')
 			totalPrice = 80 * BookedSeats.length;	
+		else if (movieName == 'Avengers: Infinity War')
+			totalPrice = 100 * BookedSeats.length;
 		else 
 			totalPrice = 60 * BookedSeats.length;
 		$("#ticket-sold-info").append("<tr><td>"+$('#name').val()+"</td><td>"+$('#seats').val()+"</td><td>"+$('#selectedMovie').val()+"</td><td>"+bookedSeats+"</td><td>"+totalPrice+"</td></tr>");
@@ -101,18 +130,22 @@ var ScreenUI=Backbone.View.extend({
 			var nameSeatsJSON=JSON.parse(localStorage.getItem('NameSeatsJSON'))||{};
 			var movieName = $('#selectedMovie').val();
 			var totalPrice = 0;
-			if (movieName == 'Movie 1')
-				totalPrice = 80 * BookedSeats.length;
+			if (movieName == 'Jurassic Park')
+				totalPrice = 80 * BookedSeats.length;	
+			else if (movieName == 'Avengers: Infinity War')
+				totalPrice = 100 * BookedSeats.length;
 			else 
-				totalPrice = 60 * BookedSeats.length;	
+				totalPrice = 60 * BookedSeats.length;
 			nameSeatsJSON[$('#name').val()] = [BookedSeats, movieName, totalPrice];
 			localStorage.setItem('NameSeatsJSON',JSON.stringify(nameSeatsJSON));
 			localStorage.setItem('ReservedSeats',JSON.stringify(reservedseats));
 			this.updateTicketInfo();
 			window.location.reload();
+			alert("Ticket Successfully booked!");
 		}
 		else{
-			$(".error").html("Please select exactly "+ $('#seats').val()+" seats");
+			var msg = "Please select exactly "+ $('#seats').val()+" seats";
+			showAlertBooking(msg, 'warning');
 		}		
 	},
 });
@@ -134,11 +167,10 @@ var TicketInfo=Backbone.View.extend({
 			items.push({names:name,numbers:number,movienames:movieName,seats:bookedSeats,totalprices:totalPrice});
 		});
 		var data={"items":items};
-		console.log(data);
 		var ticketInfoBody=_.template($("#table-ticket-info").html());
 		$("#ticket-sold-info").html(ticketInfoBody(data));
 		}
 	}
 });
 
-var ticketInfo=new TicketInfo({el:$('.table-responsive')});
+var ticketInfo = new TicketInfo({el:$('.table-responsive')});

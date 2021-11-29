@@ -1,6 +1,14 @@
 body {
 	background-color: black;
 	color: white;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.centered {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .submitBtn{
@@ -10,7 +18,7 @@ body {
 	margin-top: 50px;
 }
 .form-group{
-	margin-left:100px;
+	margin-left:80px;
 }
 .table-responsive{
 	margin-top: 50px;
@@ -31,14 +39,7 @@ body {
 	transform: rotateX(-25deg);
 	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
   }
-/* #screen{
-	width:91%;
-	border:1px solid #000;
-	text-align: center;
-	margin-left: 7%;
-	margin-top: 50px;
-	background-color: #7662FC;
-} */
+
 #table-screen{
 	margin-top: 40px;
 	margin-left:auto;
