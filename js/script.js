@@ -33,22 +33,22 @@ var movieList = document.querySelector('#movies')
 document.getElementById('filter').addEventListener('keyup', filterMovie)
 
 function filterMovie(e) {
-	e.preventDefault();
-	var text = e.target.value.toLowerCase();
-    var movies = movieList.getElementsByClassName('movie');
-    Array.from(movies).forEach(function(movie) {
-        var movieName = movie.lastElementChild.innerHTML;
-        if(movieName.toLowerCase().indexOf(text) != -1){
-            document.getElementById('p').style.display = 'none';
-            movie.style.display = 'block';
-        }
-        else{
-            document.getElementById('p').textContent = 'Sorry! No items found related to your search.';
-            document.getElementById('p').style.display = 'block';
-            document.getElementById('p').style.color = 'orange';
-            movie.style.display = 'none';
-        }
-    })
+		e.preventDefault();
+		var text = e.target.value.toLowerCase();
+		var movies = movieList.getElementsByClassName('movie');
+		Array.from(movies).forEach(function(movie) {
+			var movieName = movie.lastElementChild.innerHTML;
+			if(movieName.toLowerCase().indexOf(text) != -1){
+				document.getElementById('p').style.display = 'none';
+				movie.style.display = 'block';
+			}
+			else {
+				document.getElementById('p').textContent = 'Sorry! No items found related to your search.';
+				document.getElementById('p').style.display = 'block';
+				document.getElementById('p').style.color = 'orange';
+				movie.style.display = 'none';
+			}
+		})
 }
 
 function convertIntToSeatNumbers(seats){
