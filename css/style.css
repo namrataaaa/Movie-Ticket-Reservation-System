@@ -11,6 +11,14 @@ body {
 	transform: translate(-50%, -50%);
 }
 
+.moviepic {
+	border: 1px solid white;
+}
+
+ul {
+	list-style: none;
+}
+
 .submitBtn{
 	margin-top:50px;
 }
@@ -56,21 +64,7 @@ body {
 th {
 	padding: 1px;
 }
-/* .seat {
-	background-color: #444451;
-	height: 12px;
-	width: 15px;
-	margin: 3px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-.seat.selected {
-background-color: #6feaf6;
-}
 
-.seat.occupied {
-background-color: #fff;
-} */
 .screen-map{
 	margin-left: 50%;
 	margin-top:-50px;
@@ -78,23 +72,15 @@ background-color: #fff;
 .reserved-seat{
 	height: 15px;
 	width: auto;
-	/*content: '';*/
-    /*background: url('../img/reserved-seat.png');*/
 }
 .empty-seat{
 	cursor: pointer;
 	height: 15px;
 	width: auto;
-	/*content: url('../img/empty-seat.png')*/
 }
 .booked-seat{
 	height: 15px;
 	width: auto;
 	cursor: pointer;
 	content: url('../img/booked-seat.png');
-}
-.error{
-  font-size: 20px;
-  font-weight: 700;
-  font-family: monospace;
 }

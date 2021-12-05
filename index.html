@@ -9,32 +9,59 @@
   <title>Movie Seat Reservation</title>
   <body>
     <div class="myContainer">
-      <img src="img/cinema-4609877__480.webp" height="500px" width="100%">
+      <img src="img/cinema-4609877__480.webp" height="500px" width="100%" alt="banner">
       <div class="centered"><h1 style="color: white; text-shadow: 0px 1px, 1px 0px, 1px 1px;
         font-weight: bolder; font-size: 50px;">Welcome to Online Movie Ticket Booking.</h1></div>
       <div class="text-center mt-5 mb-5">
-        <label id="title"><h2><u>NOW PLAYING</u></h2></label>
+        <label id="title"><h1 style="color: white;">ℕ𝕠𝕨 ℙ𝕝𝕒𝕪𝕚𝕟𝕘</h1></label>
       </div>
       <div class="container" style="margin-top: 25px;">
+        <div class="row d-flex justify-content-center">
+          <div style="margin-left: auto; margin-right: auto; width: 50%;">
+            <input type="text" class="form-control" id="filter" placeholder="Search Movies..." >
+          </div>
+        </div>
+        <br>
+        <br>
         <div class="row justify-content-around text-center">
-            <div class="col-md-4 col-sm-12">
-              <img src="./img/jp1993.jpg" style="max-width: 250px" height="400px"/>
+          <div id="p"></div>
+          <ul id="movies">
+            <li>
+            <div class="col-md-4 col-sm-12 movie">
+              <a href="https://g.co/kgs/HDpqW8" target="_blank">
+                <img src="./img/jp1993.jpg" class ="moviepic" style="max-width: 250px" height="400px" 
+                  alt="Jurassic Park"/>
+              </a>
               <h3>Jurassic Park</h3>
             </div>
+            </li>
     
-            <div class="col-md-4 col-sm-12">
-              <img src="./img/ai2018.jpg" style="max-width: 250px" height="400px"/>
+            <li>
+            <div class="col-md-4 col-sm-12 movie">
+              <a href="https://g.co/kgs/af4vbQ" target="_blank">
+                <img src="./img/ai2018.jpg" class ="moviepic" style="max-width: 250px" height="400px" 
+                  alt="Avengers: Infinity War"/>
+              </a>
               <h3>Avengers: Infinity War</h3>
             </div>
+            </li>
     
-            <div class="col-md-4 col-sm-12">
-              <img src="./img/logan2017.jpg" style="max-width: 250px" height="400px"/>
-              <h3>Logan</h3>
+            <li>
+            <div class="col-md-4 col-sm-12 movie">
+              <a href="https://g.co/kgs/kvhBJd" target="_blank">
+                <img src="./img/logan2017.jpg" class ="moviepic" style="max-width: 250px" height="400px" 
+                  alt="Logan"/>
+              </a>
+                <h3>Logan</h3>
             </div>
+            </li>
+
+            </ul>
         </div>
       </div>
+      <hr style="color: whitesmoke; width: 90%; margin-top: 90px;">
       <div class="text-center mt-5 mb-5">
-        <label id="title"><h2><u>BOOK TICKET</u></h2></label>
+        <label id="title"><h1>𝔹𝕠𝕠𝕜 𝕋𝕚𝕔𝕜𝕖𝕥</h1></label>
       </div>
       
       <form class="form-inline selectionForm">
@@ -80,7 +107,7 @@
           <div style="color:red"><label class="error"></label></div>
         </div>
       </form>
-      
+
       <div class="screen-ui container">
         <div id="screen">
         </div>

@@ -13,7 +13,7 @@ function showAlert(message, className) {
 	const container = document.querySelector('.myContainer');
 	const form = document.querySelector('.selectionForm');
 	container.insertBefore(div, form);
-	setTimeout(() => document.querySelector('.alert').remove(), 2000); 
+	setTimeout(() => document.querySelector('.alert').remove(), 3000); 
 }
 
 function showAlertBooking(message, className) {
@@ -26,7 +26,29 @@ function showAlertBooking(message, className) {
 	const container = document.querySelector('.screen-ui');
 	const form = document.querySelector('#screen');
 	container.insertBefore(div, form);
-	setTimeout(() => document.querySelector('.alert').remove(), 2000); 
+	setTimeout(() => document.querySelector('.alert').remove(), 3000); 
+}
+
+var movieList = document.querySelector('#movies')
+document.getElementById('filter').addEventListener('keyup', filterMovie)
+
+function filterMovie(e) {
+	e.preventDefault();
+	var text = e.target.value.toLowerCase();
+    var movies = movieList.getElementsByClassName('movie');
+    Array.from(movies).forEach(function(movie) {
+        var movieName = movie.lastElementChild.innerHTML;
+        if(movieName.toLowerCase().indexOf(text) != -1){
+            document.getElementById('p').style.display = 'none';
+            movie.style.display = 'block';
+        }
+        else{
+            document.getElementById('p').textContent = 'Sorry! No items found related to your search.';
+            document.getElementById('p').style.display = 'block';
+            document.getElementById('p').style.color = 'orange';
+            movie.style.display = 'none';
+        }
+    })
 }
 
 function convertIntToSeatNumbers(seats){
@@ -118,7 +140,8 @@ var ScreenUI=Backbone.View.extend({
 			totalPrice = 100 * BookedSeats.length;
 		else 
 			totalPrice = 60 * BookedSeats.length;
-		$("#ticket-sold-info").append("<tr><td>"+$('#name').val()+"</td><td>"+$('#seats').val()+"</td><td>"+$('#selectedMovie').val()+"</td><td>"+bookedSeats+"</td><td>"+totalPrice+"</td></tr>");
+		$("#ticket-sold-info").append("<tr><td>"+$('#name').val()+"</td><td>"+$('#seats').val()+"</td><td>"
+			+$('#selectedMovie').val()+"</td><td>"+bookedSeats+"</td><td>"+totalPrice+"</td></tr>");
 	},
 	bookTickets:function(){
 		if(BookedSeats.length==parseInt($('#seats').val())) {
